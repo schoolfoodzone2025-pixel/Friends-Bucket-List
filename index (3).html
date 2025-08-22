@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends Bucket List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">Friends Bucket List</h1>
+                <div class="header-controls">
+                    <div class="data-controls">
+                        <button class="export-btn" id="exportBtn">Export</button>
+                        <label class="import-btn" for="importFile">
+                            Import
+                            <input type="file" id="importFile" accept=".json" style="display: none;">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Controls Section -->
+            <section class="controls-section">
+                <div class="search-filter-container">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search bucket list items..." class="search-input">
+                    </div>
+                    <div class="filter-container">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                    </div>
+                    <div class="sort-container">
+                        <select id="sortSelect" class="sort-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="title">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="add-item-btn" id="addItemBtn">
+                    <span class="add-icon">+</span>
+                    Add New Item
+                </button>
+            </section>
+
+            <!-- Bucket List Items -->
+            <section class="items-section">
+                <div class="items-container" id="itemsContainer">
+                    <!-- Items will be dynamically inserted here -->
+                </div>
+                
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">📝</div>
+                    <h3>No items found</h3>
+                    <p>Start by adding your first bucket list item!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Add/Edit Item Modal -->
+        <div class="modal-overlay" id="modalOverlay" style="display: none;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Add New Item</h2>
+                    <button class="modal-close" id="modalClose">&times;</button>
+                </div>
+                <form class="modal-form" id="itemForm">
+                    <div class="form-group">
+                        <label for="itemTitle">Title *</label>
+                        <input type="text" id="itemTitle" required placeholder="Enter bucket list item title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemDescription">Description</label>
+                        <textarea id="itemDescription" placeholder="Optional description"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemWhoAdded">Who Added *</label>
+                        <input type="text" id="itemWhoAdded" required placeholder="Your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemLocation">Location</label>
+                        <input type="text" id="itemLocation" placeholder="Optional location">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Photos (up to 3)</label>
+                        <div class="photo-upload-container">
+                            <input type="file" id="photoInput" accept="image/*" multiple class="photo-input">
+                            <div class="photo-preview" id="photoPreview"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="btn-primary" id="saveBtn">Save Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Photo Viewer Modal -->
+        <div class="photo-modal-overlay" id="photoModal" style="display: none;">
+            <div class="photo-modal">
+                <button class="photo-modal-close" id="photoModalClose">&times;</button>
+                <img id="photoModalImage" alt="Full size photo">
+                <div class="photo-modal-nav">
+                    <button class="photo-nav-btn" id="photoPrev">‹</button>
+                    <span class="photo-counter" id="photoCounter"></span>
+                    <button class="photo-nav-btn" id="photoNext">›</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
